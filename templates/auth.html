@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+  <link href="../static/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <title>Document</title>
+</head>
+<body>
+
+<div class="container" id="container">
+	<div id="teacher1" class="form-container sign-up-container">
+		<form role="form" action="/register_teacher" method="post">
+			<h2>Create Teacher Account</h2>
+			<!--div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your email for registration</span-->
+			<input id="teachercss" type="text" name="teacher_name" placeholder="Name" />
+			<input id="teachercss" type="email" name="teacher_email" placeholder="Email" />
+			<input id="teachercss" type="text" name="teacher_dept" placeholder="Department" />
+			<input id="teachercss" type="password" name="teacher_passw" placeholder="Password" />
+			<input id="teachercss" type="password" name="teacher_passw_conf" placeholder="Confirm Password" />
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<div id="student1" class="form-container sign-up-container">
+		<!--form action="#"-->
+		<form role="form" action="/register_student" method="post">
+			<h2>Create Student Account</h2>
+			<!--div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your email for registration</span-->
+			<input id="studentcss" type="text" name="form_name" placeholder="Name" />
+			<input id="studentcss" type="text" name="form_department" placeholder="Department" />
+			<input id="studentcss" type="email" name="form_email" placeholder="Email" />
+			<input id="studentcss" type="text" name="form_univ_roll" placeholder="University Roll no." />
+			<input id="studentcss" type="text" name="form_class_roll" placeholder=" Class Roll no." />
+			<input id="studentcss" type="text" name="form_sem" placeholder="Semester" />
+			<input id="studentcss" type="number" name="form_mob_no" placeholder="Mobile No." />
+			<input id="studentcss" type="password" name="form_passw" placeholder="Password" />
+			<input id="studentcss" type="password" name="form_conf_passw" placeholder="Confirm Password" />
+			<input id="studentcss" type="date" name="dateofbirth" placeholder="Date of Birth" />
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form role="form" action="/login" method="post">
+			<h1>Sign in</h1>
+			<!--div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your account</span-->
+			<select name="form-occupation" id = "teachercss" placeholder = "Occupation">
+    			<option value="TEACHER">Teacher</option>
+    			<option value="STUDENT">Student</option>
+     		</select>
+			<input type="email" placeholder="Email" name="form-username" />
+			<input type="password" placeholder="Password" name = "form-password" />
+			<a href="#">Forgot your password?</a>
+			<button>Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" onclick="signIn()">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Help us know who you are!</p>
+				<button class="ghost" onclick="teacher()">Teacher</button>
+				<br>
+				<!--button class="ghost"  id="student">Student</button></a-->
+				<button class="ghost" onclick="student()">Student</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+  
+<script src="../static/assets/js/index.js"></script>
+<br>
+{% include "_message.html" %}
+</body>
+</html>

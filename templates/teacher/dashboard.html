@@ -1,0 +1,110 @@
+{% extends 'layout-teacher.html' %}
+
+{% block main %}
+
+<div class="main__container">
+    <!-- MAIN TITLE STARTS HERE -->
+
+    <div class="main__title">
+      <img src="assets/hello.svg" alt="" />
+      <div class="main__greeting">
+        <h1>Hello Teacher</h1>
+        <p>Welcome to your dashboard</p>
+      </div>
+    </div>
+
+    <!-- MAIN TITLE ENDS HERE -->
+
+    <!-- MAIN CARDS STARTS HERE -->
+    <div class="main__cards">
+      <div class="card">
+        <i class="fa fa-envelope fa-2x text-green" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">Email</p>
+          
+        </div>
+      </div>
+
+      <div class="card">
+        <i class="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">Specialization</p>
+          
+        </div>
+      </div>
+
+      <div class="card">
+        <i
+          class="fa fa-user-o fa-2x text-lightblue"
+          aria-hidden="true"
+        ></i>
+        <div class="card_inner">
+          <p class="text-primary-p">Contact</p>
+          
+        </div>
+      </div>
+
+      <div class="card">
+        
+         <i class="fa fa-telegram fa-2x text-yellow" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">Employee Id</p>
+          
+        </div>
+      </div>
+    </div>
+    <!-- MAIN CARDS ENDS HERE -->
+
+    <!-- CHARTS STARTS HERE -->
+    <div class="charts">
+      <div class="charts__left">
+        <div class="charts__left__title">
+          <div>
+            
+           
+          </div>
+          
+        </div>
+        <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+        <p><label for="file" style="cursor: pointer;">Upload Image</label></p><br>
+        <p><img id="output" width="400" height = "250" /></p>
+      </div>
+
+      <div class="charts__right">
+        <div class="charts__right__title">
+          <div>
+            <h1>University</h1>
+            <p>Maulana Abul Kalam Azad University of Technology</p>
+          </div>
+          <img src="../static/assets/images/budapest.png" height="50px" width="50px" alt="logo" />
+        </div>
+
+        <div class="charts__right__cards">
+          
+          <div class="card4">
+            <h1>Updates</h1>
+            
+          </div>
+<div class="card3">
+            <h1>Upload CA Marks</h1>
+            
+          </div>
+<div class="card2">
+            <h1>Upload Assignment</h1>
+            
+          </div>
+<div class="card1">
+            <h1>Upload Notes</h1>
+            
+          </div>
+
+          
+
+          
+        </div>
+      </div>
+    </div>
+    <!-- CHARTS ENDS HERE -->
+  </div>
+
+{% endblock %}
