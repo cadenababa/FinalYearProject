@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -25,6 +26,10 @@ class Users(UserMixin, db.Model):
             return True
         else:
             return False
+
+    def set_password(self, new_password):
+        self.password = generate_password_hash(new_password)
+        db.session.commit()
 
     # def __repr__(self):
     #     return self.
