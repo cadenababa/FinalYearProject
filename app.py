@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from models import db, Users
 from auth import auth
+from admin import admin
 from routes import routes
 from flask_login import LoginManager
 from os import path, getenv
@@ -17,7 +18,9 @@ def create_app():
     app.secret_key = getenv("SECRET_KEY")
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
     db.init_app(app)
+    admin.init_app(app)
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     app.url_map.strict_slashes = False

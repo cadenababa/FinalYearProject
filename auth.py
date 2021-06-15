@@ -11,7 +11,6 @@ auth = Blueprint('auth', __name__)
 def register_post_student():
     if request.method == "POST":
         name = request.form.get("form_name")
-        dept = request.form.get("form_department")
         email = request.form.get("form_email")
         univroll = request.form.get("form_univ_roll")
         classroll = request.form.get("form_class_roll")
@@ -33,12 +32,17 @@ def register_post_student():
                     occupation = "student"
                     )
         db.session.add(user)
+        n_classroll = int(classroll.rsplit("/", 1)[1])
+        dept = classroll.rsplit("/", 1)[0][:-4]
+        batch = classroll.rsplit("/", 1)[0][len(dept):]
+        print (n_classroll, dept, batch)
         student = Student(name = name, 
                         department = dept, 
                         university_roll = univroll, 
-                        class_role = classroll, 
+                        class_role = n_classroll, 
                         semester = sem, 
                         mobile = mobno,
+                        batch=batch,
                         dob =  datetime.strptime(dob, '%Y-%m-%d'),
                         user = user
                         )

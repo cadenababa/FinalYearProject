@@ -40,7 +40,7 @@
           aria-hidden="true"
         ></i>
         <div class="card_inner">
-          <p class="text-primary-p">Name : {{current_user.student.name}}</p>
+          <p class="text-primary-p">Contact : {{current_user.student.mobile}}</p>
           
         </div>
       </div>
@@ -49,7 +49,7 @@
         
          <i class="fa fa-telegram fa-2x text-yellow" aria-hidden="true"></i>
         <div class="card_inner">
-          <p class="text-primary-p">Roll : {{current_user.student.class_role}}</p>
+          <p class="text-primary-p">Roll : {{create_roll(current_user.student.department, current_user.student.batch, current_user.student.class_role)}}</p>
           
         </div>
       </div>
@@ -70,15 +70,15 @@
           
         </div> -->
         <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-        <p><label for="file" style="cursor: pointer;">Upload Image</label></p><br>
-        <p><img id="output" width="400" height = "250" /></p>
+        <button><label for="file" style="cursor: pointer;">Upload Image</label></button><br><br>
+        <p><img id="output" width="400" height = "200" src="{{current_user.student.profile_image}}"/></p>
       </div>
 
       <div class="charts__right">
         <div class="charts__right__title">
           <div>
             <h1>University Details</h1>
-            <p>Maulana Abul Kalam Azad University of Technology</p>
+            <p>Maulana Abul Kalam Azad University of Technology(MAKAUT)</p>
           </div>
           <img src="../static/assets/images/budapest.png" height="50px" width="50px" alt="logo" />
         </div>
@@ -100,7 +100,7 @@
           </div>
 
           <div class="card4">
-            <h1>Year : {{sem_to_year(current_user.student.semester)}}</h1>
+            <h1>Batch : {{current_user.student.batch}}</hh1>
             
           </div>
         </div>
