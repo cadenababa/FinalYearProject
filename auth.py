@@ -1,4 +1,4 @@
-from threading import current_thread
+# from threading import current_thread
 from flask import Blueprint, render_template, request, session, logging, url_for, redirect, flash
 from models import Student, Teacher, Users,  db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,6 +6,10 @@ from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
 
 auth = Blueprint('auth', __name__)
+
+@auth.get("/")
+def home():
+	return render_template("auth.html")
 
 
 @auth.route("/register_student", methods=["POST"])
@@ -23,10 +27,15 @@ def register_post_student():
 
         if Users.query.filter_by(email=email).first():
             flash('Email id already exists! Try a new email id','danger')
-            return render_template("auth.html")
+            return redirect("/")
+
+        if Student.query.filter_by(university_roll=univroll).first():
+            flash('University Roll Number already exists! Try a new email id','danger')
+            return redirect("/")
+
         if not password1 == password2:
             flash("Password does not match","danger")
-            return render_template("auth.html")
+            return redirect("/")
         
         user = Users(email=email, 
                     password=generate_password_hash(password1), 
@@ -36,7 +45,6 @@ def register_post_student():
         n_classroll = int(classroll.rsplit("/", 1)[1])
         dept = classroll.rsplit("/", 1)[0][:-4]
         batch = classroll.rsplit("/", 1)[0][len(dept):]
-        print (n_classroll, dept, batch)
         student = Student(name = name, 
                         department = dept, 
                         university_roll = univroll, 

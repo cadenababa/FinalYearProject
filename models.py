@@ -69,6 +69,8 @@ class Subject(db.Model):
     name = db.Column(db.String(80))
     teacher_ptr_id = db.Column(db.Integer, db.ForeignKey("teacher.id"))
     course_ptr_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    ca_marks_ptr_id = db.Column(db.Integer, db.ForeignKey('ca_marks.id'))
+    # notes_ptr_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
 
     def __repr__(self):
         return self.name
@@ -83,6 +85,7 @@ class Course(db.Model):
     name = db.Column(db.String(80))
     stream = db.Column(db.String(80))
     semester = db.Column(db.Integer, nullable=False)
+    # subject = db.Column(db.String(80))
     subject = db.relationship("Subject", backref="courses", uselist=True)
 
     def __repr__(self):
@@ -101,5 +104,12 @@ class CAMarks(db.Model):
     ca2 = db.Column(db.Integer, default=0)
     ca3 = db.Column(db.Integer, default=0)
     ca4 = db.Column(db.Integer, default=0)
-    subject = db.Column(db.String(255), nullable=False, unique=True)
+    subject = db.relationship("Subject", backref="ca_marks", uselist=False)
     student_ptr_id = db.Column(db.Integer, db.ForeignKey("student.id"))
+
+# class Notes(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     semester = db.Column(db.String(80), nullable=False)
+#     department = db.Column(db.String(80), nullable=False)
+#     subject = db.relationship("Subject", backref="notes", uselist=True)
+#     teacher = db.relationship("Teacher", backref="notes", uselist=True)

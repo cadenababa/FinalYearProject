@@ -1,12 +1,13 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from models import db, Users
 from auth import auth
 from admin import admin
 from routes import routes
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required
 from os import path, getenv
 from dotenv import load_dotenv; load_dotenv()
+from flask_mail import Mail, Message
 
 BASEDIR = path.dirname(__file__)
 
@@ -19,8 +20,16 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+    app.config['MAIL_SERVER'] = getenv('MAIL_SERVER')
+    app.config['MAIL_PORT'] = getenv('MAIL_PORT')
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
+    app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
     db.init_app(app)
     admin.init_app(app)
+    mail = Mail(app)
+    app.extensions['mail'] = mail
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     app.url_map.strict_slashes = False
@@ -37,12 +46,6 @@ def create_db():
 def drop_db():
     with app.app_context():
         db.drop_all()
-
-
-@app.route("/")
-def home():
-	return render_template("auth.html")
-
 
 @login_manager.user_loader
 def load_user(user_id):

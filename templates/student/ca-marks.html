@@ -1,0 +1,78 @@
+{% extends "layout-student.html" %}
+
+{% block main %}
+
+<div class="main__container">
+    <div class="bg-dark text-light p-4">
+      <h3 class="mb-2 text-light stream_text">STREAM <a href="https://github.com/webpixels/css" target="_blank"></a></h3>
+      <p class="text-light sem_text">SEMESTER</p>
+    </div><br>
+   
+    <div class="table-responsive">
+      <table class="table table-hover table-nowrap">
+        <thead class="thead-light">
+          <tr>
+            
+            
+            <th scope="col">Paper Name</th>
+             <th scope="col">CA-1</th>
+             <th scope="col">CA-2</th>
+            <th scope="col">CA-3</th>
+            <th scope="col">CA-4</th>
+            <th scope="col">Responsible Teacher</th>
+            
+            
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ca_mark in current_user.student.ca_marks %}
+          <tr>
+            <td data-label="">
+
+          <a class="text-current" href="#">{{ca_mark.subject}}</a>
+        </td>
+        
+        <td data-label="Company">
+          <span class="badge bg-soft-success text-success">{{ca_mark.ca1}}</span>
+        </td>
+        <td data-label="Company">
+          <span class="badge bg-soft-success text-success">{{ca_mark.ca2}}</span>
+        </td>
+        <td data-label="Company">
+          <span class="badge bg-soft-success text-success">{{ca_mark.ca3}}</span>
+        </td>
+        <td data-label="Company">
+          <span class="badge bg-soft-success text-success">{{ca_mark.ca4}}</span>
+        </td>
+        <td data-label="Job Title">
+          <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+          <a class="text-heading font-semibold" href="#">
+            {{ca_mark.subject.teacher.name}}
+          </a>
+        </td>
+        <td data-label="" class="text-end">
+          <div class="dropdown">
+            <a class="text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-three-dots-vertical"></i>
+            </a>
+            <!-- <div class="dropdown-menu dropdown-menu-end">
+              <a href="#!" class="dropdown-item">
+                Action
+              </a>
+              <a href="#!" class="dropdown-item">
+                Another action
+              </a>
+              <a href="#!" class="dropdown-item">
+                Something else here
+              </a>
+            </div> -->
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}

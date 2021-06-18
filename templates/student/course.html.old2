@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/assets/css/stylesheet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@webpixels/css@1.0/dist/index.css" />
+    <link rel="stylesheet" href="../static/assets/css/ussr.css" />
     <title>Rcciit DASHBOARD</title>
   </head>
   <body id="body">
@@ -38,21 +38,21 @@
             <div class="sidebar__menu">
               <div class="sidebar__link active_menu_link">
                 <i class="fa fa-home"></i>
-                <a href="/dashboard">Dashboard</a>
+                <a href="#">Dashboard</a>
                  
               </div>
       
               <div class="sidebar__link">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
-                <a href="/course">Courses</a>
+                <a href="#">Courses</a>
               </div>
               <div class="sidebar__link">
                 <i class="fa fa-building-o"></i>
-                <a href="/student-routine">Routine</a>
+                <a href="#">Routine</a>
               </div>
               <div class="sidebar__link">
                 <i class="fa fa-user-secret"></i>
-                <a href="/student-ca-marks">CA Marks</a>
+                <a href="#">CA Marks</a>
               </div>
               
           
@@ -72,7 +72,7 @@
              
               <div class="sidebar__logout">
                 <i class="fa fa-power-off"></i>
-                <a href="/logout">Log out</a>
+                <a href="#">Log out</a>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@
               <a href="#">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </a>
-              <a href="/contact-us">
+              <a href="#">
                 <i class="fa fa-clock-o" aria-hidden="true"> Contact</i>
               </a>
               <a href="#">
@@ -99,10 +99,7 @@
               </a>
             </div>
           </nav>
-      <main id="main_content">
-        {% block main %}
-
-        {% endblock %}
+      <main>
       
         
       </main>
