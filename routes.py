@@ -14,6 +14,7 @@ import xlrd
 from time import time
 from os import remove, getenv
 from flask_mail import Message
+from decorators import *
 # from mail import mail
 
 routes = Blueprint('routes', __name__)
@@ -28,6 +29,7 @@ def dashboard_get():
         return render_template("student/dashboard.html", create_roll=create_roll)
 
 @routes.get('/course')
+@only_for_student
 @login_required
 def course_get():
     student = current_user.student
@@ -46,14 +48,26 @@ def image_upload_post():
     image_enc_data = request.get_json().get("image_enc_data").split(",")[1]
     with open(f"static/uploads/{current_user.email}.jpg", "wb") as f:
         f.write(b64decode(image_enc_data))
-        student = Student.query.get(current_user.student.id)
-        student.profile_image = f"static/uploads/{current_user.email}.jpg"
-        db.session.commit()
-        return jsonify(message="image added successfully", status=True), 200
+    student = Student.query.get(current_user.student.id)
+    student.profile_image = f"static/uploads/{current_user.email}.jpg"
+    db.session.commit()
+    return jsonify(message="image added successfully", status=True), 200
+
+@routes.post("/teacher-profile-pic-upload")
+@login_required
+def teacher_image_upload_post():
+    image_enc_data = request.get_json().get("image_enc_data").split(",")[1]
+    with open(f"static/uploads/{current_user.email}.jpg", "wb") as f:
+        f.write(b64decode(image_enc_data))
+    teacher = Teacher.query.get(current_user.teacher.id)
+    teacher.profile_image = f"static/uploads/{current_user.email}.jpg"
+    db.session.commit()
+    return jsonify(message="image added successfully", status=True), 200
 
 
 @routes.get("/student-ca-marks/")
 @login_required
+@only_for_student
 def student_ca_marks():
     return render_template('student/ca-marks.html')
 
@@ -130,7 +144,7 @@ def add_ca_marks_from_teacher_post():
         student = Student.query.filter_by(university_roll=excel_student_u_roll).first()
         
         if student is not None:
-            if student.ca_marks is None:
+            if student.ca_marks is []:
                 new_mark = CAMarks(ca1=int(excel_student[2]),
                                 ca2 = int(excel_student[3]),
                                 ca3 = int(excel_student[4]),

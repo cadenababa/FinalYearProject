@@ -1,5 +1,5 @@
 # from threading import current_thread
-from flask import Blueprint, render_template, request, session, logging, url_for, redirect, flash
+from flask import Blueprint, render_template, request, redirect, flash
 from models import Student, Teacher, Users,  db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
@@ -9,7 +9,10 @@ auth = Blueprint('auth', __name__)
 
 @auth.get("/")
 def home():
-	return render_template("auth.html")
+    if current_user.is_authenticated:
+        return redirect("/dashboard")
+    else: 
+        return render_template("auth.html")
 
 
 @auth.route("/register_student", methods=["POST"])
@@ -65,9 +68,15 @@ def register_post_teacher():
     if request.method == "POST":
         name = request.form.get("teacher_name")
         email = request.form.get("teacher_email")
+        emp_id = request.form.get("teacher_emp_id")
+        mobile = request.form.get("teacher_mobile")
         dept = request.form.get("teacher_dept")
         passw1 = request.form.get("teacher_passw")
         passw2 = request.form.get("teacher_passw_conf")
+
+        if dept is "None":
+            flash("Please select the appropriate department", "danger")
+            return redirect("/")
 
         if Users.query.filter_by(email=email).first():
             flash('Email id already exists! Try a new email id','danger')
@@ -82,6 +91,7 @@ def register_post_teacher():
                     )
         db.session.add(user)
         teacher = Teacher(name = name,  
+                mobile = mobile,
                 department = dept, 
                 user=user
                 )

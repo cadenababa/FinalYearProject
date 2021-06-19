@@ -22,8 +22,17 @@
 			</div>
 			<span>or use your email for registration</span-->
 			<input id="teachercss" type="text" name="teacher_name" placeholder="Name" />
+			<!-- <input id="teachercss" type="text" name="teacher_emp_id" placeholder="Employee ID" /> -->
 			<input id="teachercss" type="email" name="teacher_email" placeholder="Email" />
-			<input id="teachercss" type="text" name="teacher_dept" placeholder="Department" />
+			<input id="teachercss" type="number" name="teacher_mobile" placeholder="Mobile No." />
+			<select id="teachercss" type="text" name="teacher_dept">
+				<option value="{{None}}">-- Department --</option>
+				<option value="ece">Electronics & Communication [ECE]</option>
+				<option value="it">Information Technology [IT]</option>
+				<option value="cse">Computer Science [CSE]</option>
+				<option value="bca">Computer Application [BCA]</option>
+			</select>
+			{# <input id="teachercss" type="text" name="teacher_dept" placeholder="Department" /> #}
 			<input id="teachercss" type="password" name="teacher_passw" placeholder="Password" />
 			<input id="teachercss" type="password" name="teacher_passw_conf" placeholder="Confirm Password" />
 			<button>Sign Up</button>

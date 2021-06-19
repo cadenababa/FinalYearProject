@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
+from utils import generate_employee_id
 
 db = SQLAlchemy()
 
@@ -31,8 +32,11 @@ class Users(UserMixin, db.Model):
         self.password = generate_password_hash(new_password)
         db.session.commit()
 
-    # def __repr__(self):
-    #     return self.
+    def __repr__(self):
+        if self.is_teacher:
+            return f'"{self.teacher.name}"--ptr-user-<{self.id}>'
+        else:
+            return f'"{self.student.name}"--ptr-user-<{self.id}>'
 
 class Student(db.Model):
     __tablename__ = "student"
@@ -55,13 +59,19 @@ class Student(db.Model):
 
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    emp_id = db.Column(db.Integer, unique=True, default=generate_employee_id)
     name = db.Column(db.String(80))
     department = db.Column(db.String(80))
+    mobile = db.Column(db.String(15))
+    profile_image = db.Column(db.String(255), default="https://www.w3schools.com/howto/img_avatar.png")
     user_ptr_id  = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, unique=True)
     subject = db.relationship("Subject", backref="teacher", uselist=True)
 
+    # def __init__(self, *args, **kwargs):
+        
+
     def __repr__(self):
-        return self.name
+        return f"{self.name} <{self.emp_id}>"
 
 
 class Subject(db.Model):
@@ -69,7 +79,7 @@ class Subject(db.Model):
     name = db.Column(db.String(80))
     teacher_ptr_id = db.Column(db.Integer, db.ForeignKey("teacher.id"))
     course_ptr_id = db.Column(db.Integer, db.ForeignKey('course.id'))
-    ca_marks_ptr_id = db.Column(db.Integer, db.ForeignKey('ca_marks.id'))
+    ca_marks_ptr_id = db.Column(db.Integer, db.ForeignKey('ca_marks.id'), unique=True)
     # notes_ptr_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
 
     def __repr__(self):
