@@ -490,3 +490,15 @@ main {
 #main_content {
   position: relative;
 }
+
+.ca_marks_stream {
+  height : 50px;
+  width : 400px;
+  margin : 10 px;
+  border : 2px solid #000
+}
+
+.ca_marks_semester {
+  height : 50px;
+  width : 400px;
+}

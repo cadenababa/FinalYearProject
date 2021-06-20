@@ -42,6 +42,18 @@ def course_get():
         print(o_course.subject)
     return render_template("student/course.html", course=o_course)
 
+@routes.get("/student-notes")
+@login_required
+@only_for_student
+def student_notes_get():
+    return render_template("student/notes.html")
+
+@routes.get("/teacher-notes")
+@login_required
+@only_for_teacher
+def teacher_notes_get():
+    return render_template("teacher/notes.html")
+
 @routes.post("/student-profile-pic-upload")
 @login_required
 def image_upload_post():
@@ -68,8 +80,14 @@ def teacher_image_upload_post():
 @routes.get("/student-ca-marks/")
 @login_required
 @only_for_student
-def student_ca_marks():
+def student_ca_marks_get():
     return render_template('student/ca-marks.html')
+
+@routes.get("/teacher-ca-marks/")
+@login_required
+@only_for_teacher
+def teacher_ca_marks_get():
+    return render_template('teacher/ca-marks.html')
 
 @routes.get("/contact-us")
 def contact_us_get():
@@ -109,6 +127,15 @@ def student_routine_get():
 #         student.profile_image = f"static/uploads/{current_user.email}.jpg"
 #         db.session.commit()
 #         return jsonify(message="image added successfully", status=True), 200
+
+@routes.get("/teacher-routine")
+@login_required
+@only_for_teacher
+def teacher_routine_get():
+    # semester = request.args.get("semester")
+    # department = request.args.get("department")
+    # routine = Routines.query.filter(Routines.department == department, Routines.semester == semester).first()
+    return render_template("teacher/routine.html") 
 
 @routes.post("/add-ca-marks-from-teacher")
 # @login_required

@@ -1,3 +1,5 @@
+ <!doctype html>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,19 +13,21 @@
     />
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/assets/css/stylesheet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@webpixels/css@1.0/dist/index.css" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="ussr.css" />
     <title>Rcciit DASHBOARD</title>
   </head>
-  <body id="body">    
+  <body id="body">
+    <!-- <div class="container"> -->
+    
     
       <div class="row">
         <div class="col-md-3">
           <div id="sidebar">
             <div class="sidebar__title">
               <div class="sidebar__img">
-                <img src="../static/assets/images/RCC_LOGO.png" height="50px" width="50px" alt="logo" />
-                <p style="margin-left: 10px;">Rcc Institute Of Information Technology</p>
+                <img src="RCC_LOGO.png" height="50px" width="50px" alt="logo" />
+                <p>Rcc Institute Of Information Technology</p>
               </div>
               <i
                 onclick="closeSidebar()"
@@ -36,24 +40,28 @@
             <div class="sidebar__menu">
               <div class="sidebar__link active_menu_link">
                 <i class="fa fa-home"></i>
-                <a href="/dashboard">Dashboard</a>
+                <a href="#">Dashboard</a>
                  
               </div>
       
               <div class="sidebar__link">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                <a href="#">Courses</a>
+              </div>
+              <div class="sidebar__link">
                 <i class="fa fa-building-o"></i>
-                <a href="/teacher-routine">Routine</a>
+                <a href="#">Routine</a>
               </div>
               <div class="sidebar__link">
                 <i class="fa fa-user-secret"></i>
-                <a href="/teacher-ca-marks">CA Marks</a>
+                <a href="#">CA Marks</a>
               </div>
               
           
               
               <div class="sidebar__link">
                 <i class="fa fa-sign-out"></i>
-                <a href="/teacher-notes">Notes</a>
+                <a href="#">Notes</a>
               </div>
               <div class="sidebar__link">
                 <i class="fa fa-calendar-check-o"></i>
@@ -61,12 +69,12 @@
               </div>
               <div class="sidebar__link">
                 <i class="fa fa-files-o"></i>
-                <a href="/change-password">Change Password</a>
+                <a href="#">Change Password</a>
               </div>
              
               <div class="sidebar__logout">
                 <i class="fa fa-power-off"></i>
-                <a href="/logout">Log out</a>
+                <a href="#">Log out</a>
               </div>
             </div>
           </div>
@@ -78,13 +86,13 @@
             </div>
             <div class="navbar__left">
               
-              <a class="active_link" href="#">Teacher</a>
+              <a class="active_link" href="#">Student</a>
             </div>
             <div class="navbar__right">
               <a href="#">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </a>
-              <a href="/contact-us">
+              <a href="#">
                 <i class="fa fa-clock-o" aria-hidden="true"> Contact</i>
               </a>
               <a href="#">
@@ -93,12 +101,22 @@
               </a>
             </div>
           </nav>
-      <main id="main_content">
-        {% block main %}
-
-        {% endblock %}
+      <main>
       
-        
+        <div class="main__container">
+          <div class="bg-dark text-light p-4">
+            <h3 class="mb-2 text-light stream_text">CHANGE YOUR PASSWORD<a href="https://github.com/webpixels/css" target="_blank"></a></h3>
+
+            <form action="#">
+              <label for="cp">Current Password</label><br>
+              <input type="password" id="passwr" name="cp"><br><br>
+              <label for="np">New Password</label><br>
+              <input type="password" id="passwr" name="np"><br><br>
+              <label for="cnp">Confirm New Password</label><br>
+              <input type="password" id="passwr" name="cnp"><br><br>
+              <input type="submit" value="Submit">
+            </form>
+           
       </main>
     </div>
 
@@ -106,7 +124,6 @@
   </div>
     <!-- </div> -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../static/assets/js/dc.js"></script>
-    {% block custom_js %}{% endblock %}
+    <script src="dc.js"></script>
   </body>
 </html>

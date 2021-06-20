@@ -1,4 +1,3 @@
-# from threading import current_thread
 from flask import Blueprint, render_template, request, redirect, flash
 from models import Student, Teacher, Users,  db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -127,8 +126,10 @@ def logout_get():
 @auth.get("/change-password")
 @login_required
 def change_password_get():
-    return
-    return render_template("")
+    if not current_user.is_teacher:
+        return render_template("student/change-password.html")
+    else:
+        return render_template("teacher/change-password.html")
 
 @auth.post("/change-password")
 @login_required
@@ -138,7 +139,10 @@ def change_password_post():
     confirm_new_password = request.form.get("confirm_new_password")
     if not new_password == confirm_new_password:
         flash("password mismatch", "error")
+        redirect("/change-password")
     if not check_password_hash(current_user.password, current_password):
         flash("invalid current password", "error")
+        redirect("/change-password")
     current_user.set_password(new_password)
-    return render_template("")
+    flash("password changed successfully", "success")
+    return redirect("/change-password")
