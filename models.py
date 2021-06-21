@@ -10,7 +10,7 @@ class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(300), nullable=False)
-    occupation = db.Column(db.String(15))
+    occupation = db.Column(db.String(15), nullable=False)
     student = db.relationship("Student", backref="user", uselist=False)
     teacher = db.relationship("Teacher", backref="user", uselist=False)
 
@@ -66,8 +66,6 @@ class Teacher(db.Model):
     profile_image = db.Column(db.String(255), default="https://www.w3schools.com/howto/img_avatar.png")
     user_ptr_id  = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, unique=True)
     subject = db.relationship("Subject", backref="teacher", uselist=True)
-
-    # def __init__(self, *args, **kwargs):
         
 
     def __repr__(self):
@@ -91,7 +89,6 @@ class Course(db.Model):
     name = db.Column(db.String(80))
     stream = db.Column(db.String(80))
     semester = db.Column(db.Integer, nullable=False)
-    # subject = db.Column(db.String(80))
     subject = db.relationship("Subject", backref="courses", uselist=True)
 
     def __repr__(self):
