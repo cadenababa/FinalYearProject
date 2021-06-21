@@ -502,3 +502,9 @@ main {
   height : 50px;
   width : 400px;
 }
+
+.navbar-search-inp {
+  background-color: #EDE2F4;
+  border : 1px solid black;
+  border-radius: 5px;
+}

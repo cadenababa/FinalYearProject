@@ -81,9 +81,12 @@
               <a class="active_link" href="#">Teacher</a>
             </div>
             <div class="navbar__right">
-              <a href="#">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </a>
+              <form method="post" action="/student-details">
+                <input type="text" name="university_roll" class="navbar-search-inp" placeholder="Enter Student Roll no for details">
+                <button type="submit" value="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
               <a href="/contact-us">
                 <i class="fa fa-clock-o" aria-hidden="true"> Contact</i>
               </a>

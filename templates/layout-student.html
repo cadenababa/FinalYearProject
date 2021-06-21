@@ -87,9 +87,12 @@
               <a class="active_link" href="#">Student</a>
             </div>
             <div class="navbar__right">
-              <a href="#">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </a>
+              <form method="post" action="/teacher-details">
+                <input type="text" name="emp_id" class="navbar-search-inp" placeholder="Enter Teacher emp Id for details">
+                <button type="submit" value="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
               <a href="/contact-us">
                 <i class="fa fa-clock-o" aria-hidden="true"> Contact</i>
               </a>

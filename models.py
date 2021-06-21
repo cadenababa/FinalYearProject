@@ -77,18 +77,14 @@ class Teacher(db.Model):
 class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
+    code = db.Column(db.String(80), nullable=False, unique=True)
     teacher_ptr_id = db.Column(db.Integer, db.ForeignKey("teacher.id"))
     course_ptr_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     ca_marks_ptr_id = db.Column(db.Integer, db.ForeignKey('ca_marks.id'), unique=True)
-    # notes_ptr_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
+    notes = db.relationship("Notes", backref="subject", uselist=True)
 
     def __repr__(self):
-        return self.name
-    
-# subject_course_con = db.Table("group_user_con", 
-#                     db.Column('subject_id', db.Integer, db.ForeignKey("subject.id")),
-#                     db.Column('course_id', db.Integer, db.ForeignKey("course.id"))
-#                     )
+        return f"{self.name} <{self.code}>"
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -117,9 +113,10 @@ class CAMarks(db.Model):
     subject = db.relationship("Subject", backref="ca_marks", uselist=False)
     student_ptr_id = db.Column(db.Integer, db.ForeignKey("student.id"))
 
-# class Notes(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     semester = db.Column(db.String(80), nullable=False)
-#     department = db.Column(db.String(80), nullable=False)
-#     subject = db.relationship("Subject", backref="notes", uselist=True)
-#     teacher = db.relationship("Teacher", backref="notes", uselist=True)
+class Notes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    semester = db.Column(db.String(80), nullable=False)
+    department = db.Column(db.String(80), nullable=False)
+    name = db.Column(db.String(80), nullable=False)
+    content_url = db.Column(db.String(255))
+    subject_ptr_id = db.Column(db.Integer, db.ForeignKey("subject.id"))
