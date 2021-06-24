@@ -1,14 +1,16 @@
-import xlrd
-import openpyxl as xl
+# import xlrd
+# import openpyxl as xl
+
+from time import time
 
 def sem_to_year(sem):
     return round((int(sem)/2))
 
-def xlsx_to_xls(file):
-    wb = xl.load_workbook(file)
-    filepath = f"{file.rsplit('.', 1)[0]}.xls"
-    wb.save(filepath)
-    return filepath
+# def xlsx_to_xls(file):
+#     wb = xl.load_workbook(file)
+#     filepath = f"{file.rsplit('.', 1)[0]}.xls"
+#     wb.save(filepath)
+#     return filepath
 
 def len_check(roll):
     if not isinstance(roll, str):
@@ -23,5 +25,7 @@ def len_check(roll):
 def create_roll(dept, batch, roll) -> str:
     return f"{dept}{batch}/{len_check(str(roll))}"
 
-def generate_employee_id(cls):
-    return f"RCC-TCHR-{len_check(cls.current_parameters.get('user_ptr_id'))}"
+def generate_employee_id():
+    time_var = str(time)
+    time_var = time_var[len(time_var)-3:]
+    return f"RCC-TCHR-{time_var}"
