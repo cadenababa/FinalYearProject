@@ -59,7 +59,7 @@ class Student(db.Model):
 
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    emp_id = db.Column(db.Integer, unique=True, default=generate_employee_id)
+    emp_id = db.Column(db.String, unique=True, default=generate_employee_id, max_length=30)
     name = db.Column(db.String(80))
     department = db.Column(db.String(80))
     mobile = db.Column(db.String(15))
