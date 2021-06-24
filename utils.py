@@ -26,6 +26,7 @@ def create_roll(dept, batch, roll) -> str:
     return f"{dept}{batch}/{len_check(str(roll))}"
 
 def generate_employee_id():
-    time_var = str(time)
+    time_var = str(time())
     time_var = time_var[len(time_var)-3:]
+    print (time_var)
     return f"RCC-TCHR-{time_var}"
